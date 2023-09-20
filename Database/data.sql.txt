@@ -1,0 +1,40 @@
+CREATE TABLE Customer (
+    CustomerID INT PRIMARY KEY,
+    Name VARCHAR(50),
+    AccountType VARCHAR(20),
+    InterestRate DECIMAL(5, 2),
+    Balance DECIMAL(10, 2),
+    Username VARCHAR(30),
+    Password VARCHAR(30)
+);
+
+CREATE TABLE Bank (
+    BankID INT PRIMARY KEY,
+    Branch VARCHAR(50),
+    BankName VARCHAR(50),
+    Location VARCHAR(50)
+);
+
+CREATE TABLE AccountType (
+    AccountTypeID INT PRIMARY KEY,
+    AccountType VARCHAR(20),
+    CustomerID INT,
+    FOREIGN KEY (CustomerID) REFERENCES Customer(CustomerID)
+);
+
+CREATE TABLE Transaction (
+    TransactionID INT PRIMARY KEY,
+    CustomerID INT,
+    Amount DECIMAL(10, 2),
+    TransactionDate DATETIME,
+    FOREIGN KEY (CustomerID) REFERENCES Customer(CustomerID)
+);
+
+
+
+CREATE TABLE BelongsToBank (
+    CustomerID INT,
+    BankID INT,
+    FOREIGN KEY (CustomerID) REFERENCES Customer(CustomerID),
+    FOREIGN KEY (BankID) REFERENCES Bank(BankID)
+);
